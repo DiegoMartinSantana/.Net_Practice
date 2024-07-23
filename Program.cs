@@ -21,6 +21,79 @@ namespace NetCoreProyectExample
             app.Run(async (HttpContext context) =>
             {
 
+                #region HouseWork (3)
+
+                // received 3 values. two numbers (int)  and a operation simbole  (+,-,*,/ or %)
+
+                // values its part of a url
+                context.Response.Headers["Content-Type"] = "text/html";
+                string method = context.Request.Method;
+                if (method == "GET")
+                {
+                    if (context.Request.Query.ContainsKey("v1") && context.Request.Query.ContainsKey("v2") &&
+                    context.Request.Query.ContainsKey("ope"))
+                    {
+                        int firstValue, secondValue;
+                        string? operatorValue;
+                        firstValue = int.Parse(context.Request.Query["v1"]);
+                        secondValue = int.Parse(context.Request.Query["v2"]);
+                        operatorValue = context.Request.Query["ope"];
+                        decimal? finallyResult;
+                        switch (operatorValue)
+                        {
+                            case "add":
+                                finallyResult = firstValue + secondValue;
+                                break;
+                            case "less":
+                                finallyResult = secondValue - firstValue;
+                                break;
+                            case "mul":
+                                finallyResult = firstValue / secondValue;
+                                break;
+                            case "divide":
+                                finallyResult = secondValue / secondValue;
+                                break;
+                            case "percentage":
+                                finallyResult = firstValue / secondValue;
+                                break;
+                            default:
+                                finallyResult = null;
+                                break;
+
+                        }
+                        if(finallyResult == null)
+                        {
+                            context.Response.StatusCode = 400;
+                            await context.Response.WriteAsync("Invalid operation");
+                            return;
+                        }
+                        
+                        context.Response.StatusCode = 200;
+                        await context.Response.WriteAsync("Result = " + finallyResult);
+
+
+                    }
+                    else
+                    {
+                        context.Response.StatusCode = 400;
+                        await context.Response.WriteAsync("Not all values are sending");
+                    }
+
+
+                }
+                else
+                {
+                    context.Response.StatusCode = 400;
+                    await context.Response.WriteAsync("Incorrect Method");
+                }
+
+
+
+                // finally return the result of the operation
+
+                #endregion
+
+
                 #region Class Http (3)
                 /*
                 context.Response.Headers["Content-Type"] = "text/html";
