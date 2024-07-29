@@ -23,6 +23,9 @@ namespace NetCoreProyectExample
             //
             //builder.Services
 
+            //enable controllers
+            builder.Services.AddControllers();
+
             builder.Services.AddTransient<MyCustomMiddleware>();
 
             //add custom constraint 
@@ -36,63 +39,74 @@ namespace NetCoreProyectExample
                                       // app.MapGet("/", () => "Hi Future Developer!");
 
             //app run recibe un argumento  : httpcontext
+
+            #region Controllers (6)
+            //enable map controllers
+            app.MapControllers();
+            app.UseStaticFiles();
+
+            #endregion
+
+
             #region HomeWork (5) Routing 
             //enable routing
-            app.UseRouting();
-
-            Dictionary<int, string> Countries = new Dictionary<int, string>();
-            Countries.Add(1, "Usa");
-            Countries.Add(2, "Canada");
-            Countries.Add(3, "United Kingdom");
-            Countries.Add(4, "India");
-            Countries.Add(5, "Japan");
-
             /*
-            Handler this dictionary with id request, all request and excepctions.
-            */
-            //Path : /Countries
+               app.UseRouting();
+
+               Dictionary<int, string> Countries = new Dictionary<int, string>();
+               Countries.Add(1, "Usa");
+               Countries.Add(2, "Canada");
+               Countries.Add(3, "United Kingdom");
+               Countries.Add(4, "India");
+               Countries.Add(5, "Japan");
+
+
+               Handler this dictionary with id request, all request and excepctions.
+
+               //Path : /Countries
 
 
 
-            //all
-            app.MapGet("Countries", async context =>
-            {
-                foreach (var country in Countries)
-                {
-                    await context.Response.WriteAsync(" " + country.Value+ "");
-                }
+               //all
+               app.MapGet("Countries", async context =>
+               {
+                   foreach (var country in Countries)
+                   {
+                       await context.Response.WriteAsync(" " + country.Value+ "");
+                   }
 
-            });
+               });
 
-            //create a class to define the constraints
+               //create a class to define the constraints
 
-            //id
-            app.MapGet("Countries/{id:int}", async context =>
-            {
-                int id = Convert.ToInt32(context.Request.RouteValues["id"]);
-                if (id > 100 || id <0)
-                {
-                    context.Response.StatusCode = 400;
-                    await context.Response.WriteAsync("The value has not to be more at 100 at not less as 1");
-                    return;
-                }
-                if (!Countries.ContainsKey(id))
-                {
-                    context.Response.StatusCode = 404;
-                    await context.Response.WriteAsync("The value dont exists in the Bd.");
-                    return;
-                }
+               //id
+               app.MapGet("Countries/{id:int}", async context =>
+               {
+                   int id = Convert.ToInt32(context.Request.RouteValues["id"]);
+                   if (id > 100 || id <0)
+                   {
+                       context.Response.StatusCode = 400;
+                       await context.Response.WriteAsync("The value has not to be more at 100 at not less as 1");
+                       return;
+                   }
+                   if (!Countries.ContainsKey(id))
+                   {
+                       context.Response.StatusCode = 404;
+                       await context.Response.WriteAsync("The value dont exists in the Bd.");
+                       return;
+                   }
 
-                context.Response.StatusCode = 200;
-                await context.Response.WriteAsync("Country : " + Countries[id]);
+                   context.Response.StatusCode = 200;
+                   await context.Response.WriteAsync("Country : " + Countries[id]);
 
-            });
+               });
+               */
 
             #endregion
 
 
             #region Routing (5)
-
+            /*
             //create end points
 
             //work with "myroot"
@@ -245,11 +259,12 @@ namespace NetCoreProyectExample
 
 
             });
+            */
             #endregion
 
 
             #region HomeWork (4) Middlewares
-
+            /*
             app.UseMiniLoginMiddleware();
 
             #endregion
@@ -274,14 +289,6 @@ namespace NetCoreProyectExample
     Custom Middleware
 
     MVC/Razor Pages/Minimal APIs
-
-
-
-            */
-
-
-
-
 
 
 
@@ -339,6 +346,7 @@ namespace NetCoreProyectExample
                 await context.Response.WriteAsync("This middleware DONT allow to forward to the next middleware\n");
 
             });
+            */
             #endregion
             /*
             app.Run(async (HttpContext context) =>
