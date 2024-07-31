@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
+using NetCoreProyectExample.CustomBinder;
 using NetCoreProyectExample.CustomConstraints;
 using NetCoreProyectExample.CustomMiddlewares;
 using System.Diagnostics.Metrics;
@@ -25,7 +26,11 @@ namespace NetCoreProyectExample
 
             //enable controllers
             builder.Services.AddControllers();
-
+            builder.Services.AddControllers(options =>
+            {
+                options.ModelBinderProviders.
+            Insert(0, new CustomModelBinderPROVIDER() );
+            });
             builder.Services.AddTransient<MyCustomMiddleware>();
 
             //add custom constraint 
