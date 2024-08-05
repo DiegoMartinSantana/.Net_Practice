@@ -25,6 +25,7 @@ namespace NetCoreProyectExample
             //builder.Services
 
             //enable controllers
+            builder.Services.AddControllersWithViews();
             builder.Services.AddControllers();
             builder.Services.AddControllers(options =>
             {
@@ -44,11 +45,11 @@ namespace NetCoreProyectExample
                                       // app.MapGet("/", () => "Hi Future Developer!");
 
             //app run recibe un argumento  : httpcontext
-
+            app.UseStaticFiles();
             #region Controllers (6)
             //enable map controllers
             app.MapControllers();
-            app.UseStaticFiles();
+           
 
             #endregion
 

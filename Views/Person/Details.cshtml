@@ -1,0 +1,20 @@
+﻿@model PersonModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div class="page-content">
+    <h4>Details of : @Model.Name</h4>
+    <div class="">
+        <label>Age : </label>
+        <strong> <label> @Model.Age</label> </strong>
+    </div>
+    <label>Nationality : </label>
+    <strong><label>@Model.Nationality</label></strong>
+</div>
+<div>
+    <a href="/Person/Home">Back to List</a>
+</div>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<PersonModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["appTitle"]</title>
+    <meta charset="utf-8" />
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+</head>
+<body class="﻿bodyClass">
+    <div class="page-content">
+        <h1>Welcome</h1>
+        @{
+            List<PersonModel>? people = (List<PersonModel>?)ViewData["collectionPeople"];
+        }
+
+        @foreach (PersonModel person in Model)
+        {
+            <div class="box float-left w-50">
+                <h3>@person.Name</h3>
+                <table class="table w-100">
+                    <tbody>
+                        <tr>
+                            <td>Gender</td>
+                            <td>@person.Age</td>
+                        </tr>
+                        <tr>
+                            <td>Date of Birth</td>
+                            <td>@person.Nationality</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div>
+                    <a href="/Person/Details?name=@person.Name">Go to Details</a>
+
+                </div>
+            </div>
+        }
+    </div>
+
+
+</body>
+</html>

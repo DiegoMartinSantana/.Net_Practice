@@ -1,0 +1,60 @@
+﻿@using NetCoreProyectExample.Models
+@model IEnumerable<CityWeather>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="~/WeatherAppStyle.css" rel="stylesheet" />
+</head>
+<body class="﻿bodyClass">
+
+    @functions {
+        string GetColor(int temperature)
+        {
+            if (temperature < 44)
+            {
+                return "blue-back";
+            }
+            else if (temperature > 74)
+            {
+                return "green-back";
+            }
+            else
+            {
+                return "orange-back";
+            }
+        }
+    }
+    <div class="page-content">
+        <div class="margin-bottom">
+            <h2>Weather</h2>
+
+        </div>
+        <div class="margin-top-200 margin-left">
+
+            <div class="flex">
+
+                @foreach (var city in Model)
+                {
+                    <div class="@GetColor(city.TemperatureFahrenheit) w-30 box cursor-pointer">
+                        <div class="flex-borderless">
+                            <div class="w-50">
+                                <h4>@city.CityName</h4>
+                                <h4 class="text-dark-grey margin-top">@city.DateAndTime.ToString("hh:mm tt")</h4>
+                                <a href="~/Details/@city.CityUniqueCode">Details</a>
+                           
+
+                            </div>
+                            <div class="w-50 border-left">
+                                <h1 class="margin-left">@city.TemperatureFahrenheit <sup class="text-grey">&#8457</sup></h1>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
