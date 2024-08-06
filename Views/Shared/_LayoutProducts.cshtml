@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+    <link href="~/WeatherAppStyle.css" rel="stylesheet" />
+    <title>@ViewData["title"]</title>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-brand">
+                Asp Net Core App
+            </div>
+            <ul>
+                <li>
+                    <a href="/HomeProducts">Home</a>
+                </li>
+                <li>
+                    <a href="/HomeProducts/About">About</a> 
+                </li>
+                <li>
+                    <a href="/HomeProducts/Contact">Contact</a>
+                </li>
+                <li>
+                    <a href="/Products">All Products</a>
+                </li>
+                <li>
+                    <a href="/Products/Search">Search Products</a>
+                </li>
+                <li>
+                    <a href="/Products/Order">Order Product</a>
+                </li>
+            </ul>
+        </div>
+        <div class="page-content">
+            @RenderBody()
+
+        </div>
+        @RenderSection("footer_section",false);
+        <div>
+
+        </div>
+    </div>
+</body>
+</html>

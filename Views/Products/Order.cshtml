@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["title"] = "Order Product";
+}
+<link href="~/StyleSheetPartial.css" rel="stylesheet" />
+<h2>Example to consume a  RETURN PARTIAL VIEW WITH FECTH</h2>
+<button class="button button-blue-back" type="button" id="button-countries-show"> Load Countries </button>
+<div class="box countries-content">
+
+</div>
+
+<script>
+
+    document.querySelector("#button-countries-show").addEventListener("click", async function() {
+        var response = await fetch("/Products/SomePartial");
+        var htmlCountries = await response.text();
+        document.querySelector(".countries-content").innerHTML = htmlCountries;
+    });
+
+</script>

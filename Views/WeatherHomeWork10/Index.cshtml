@@ -1,0 +1,17 @@
+﻿@model IEnumerable<CityWeather>
+@functions {
+    
+}
+
+<div class="margin-top-200 margin-left">
+
+    <div class="flex">
+        <!--loop here and pass the item-->
+        @foreach (CityWeather city in Model)
+        {
+            <partial name="_CityWeatherPartialView" model="city" />
+
+        }
+
+    </div>
+</div>
